@@ -41,6 +41,8 @@ function config(DEBUG, VERBOSE) {
             'react-chartjs-2': 'ReactChartJS',
             'react-router-dom': 'ReactRouter',
             'reactstrap': 'ReactStrap',
+            'mobx-react': 'MobxReact',
+            'mobx': 'Mobx',
             '../../../../../../../../cms-web-app/src/main/front-end/javascript/transport/Request': 'Request'
         }
     };

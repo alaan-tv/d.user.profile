@@ -3,11 +3,25 @@ import {ProfileProgressItem} from './dashboard/ProfileProgressItem';
 import {ProfilePieItem} from './dashboard/ProfilePieItem';
 import UserProfilePanel from "./panels/UserProfilePanel";
 import UserTasksPanel from "./panels/UserTasks";
-import {request} from "../../../../../../../d.cms/cms-web-app/src/main/front-end/javascript/transport/Request";
+import {extendObservable} from 'mobx';
 
 defineModule(['react'], (React)=> {
 
     let serviceRegistry = [];
+
+    let taskBadge = extendObservable({}, {
+        variant: 'info',
+        text: 5
+    });
+
+    const timer = ()=>{
+        taskBadge.text += 1;
+        setTimeout(timer, 1000);
+    };
+
+    setTimeout(timer, 2000);
+
+    window.taskBadge = taskBadge;
 
     return {
         activator: {
@@ -45,10 +59,7 @@ defineModule(['react'], (React)=> {
                             path: '/profile',
                             icon: 'fa fa-user',
                             component: UserProfilePanel,
-                            badge:{
-                                variant: 'info',
-                                text: 'new'
-                            }
+                            badge: taskBadge
                         },
                             {
                                 name: 'My Tasks',
@@ -56,10 +67,7 @@ defineModule(['react'], (React)=> {
                                 path: '/tasks',
                                 icon: 'fa fa-tasks',
                                 component: UserTasksPanel,
-                                badge:{
-                                    variant: 'info',
-                                    text: 'new'
-                                }
+                                badge: taskBadge
                             }],
                         {
                             order: 'last'
@@ -75,7 +83,8 @@ defineModule(['react'], (React)=> {
                             url: '/settings',
                             path: '/settings',
                             icon: 'fa fa-cog',
-                            component: UserProfilePanel
+                            component: UserProfilePanel,
+                            badge: taskBadge
                         }],
                         {
                             order: 'first'
