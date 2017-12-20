@@ -85,6 +85,9 @@ function config(DEBUG, VERBOSE) {
         // Choose a developer tool to enhance debugging
         // http://webpack.github.io/docs/configuration.html#devtool
         devtool: DEBUG ? 'source-map' : false,
+        node: {
+            fs: "empty"
+        }
     });
 
 

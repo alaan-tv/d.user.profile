@@ -1,6 +1,8 @@
 import {ProfileMenuItem} from './ProfileMenuItem';
 import {ProfileProgressItem} from './dashboard/ProfileProgressItem';
 import {ProfilePieItem} from './dashboard/ProfilePieItem';
+import UserProfilePanel from "./panels/UserProfilePanel";
+import UserTasksPanel from "./panels/UserTasks";
 import {request} from "../../../../../../../d.cms/cms-web-app/src/main/front-end/javascript/transport/Request";
 
 defineModule(['react'], (React)=> {
@@ -31,6 +33,54 @@ defineModule(['react'], (React)=> {
                         id: '5d4b2f67-ee47-4a84-947d-d9b65d94e3ab',
                         roles: ['editor-in-chief', 'system-admin', 'site-manager']
                     })
+                );
+
+
+                serviceRegistry.push(
+                    context.registerService(
+                        'd.cms.ui.router',
+                        [{
+                            name: 'My Profile',
+                            url: '/profile',
+                            path: '/profile',
+                            icon: 'fa fa-user',
+                            component: UserProfilePanel,
+                            badge:{
+                                variant: 'info',
+                                text: 'new'
+                            }
+                        },
+                            {
+                                name: 'My Tasks',
+                                url: '/tasks',
+                                path: '/tasks',
+                                icon: 'fa fa-tasks',
+                                component: UserTasksPanel,
+                                badge:{
+                                    variant: 'info',
+                                    text: 'new'
+                                }
+                            }],
+                        {
+                            order: 'last'
+                        }
+                    )
+                );
+
+                serviceRegistry.push(
+                    context.registerService(
+                        'd.cms.ui.router',
+                        [{
+                            name: 'Settings',
+                            url: '/settings',
+                            path: '/settings',
+                            icon: 'fa fa-cog',
+                            component: UserProfilePanel
+                        }],
+                        {
+                            order: 'first'
+                        }
+                    )
                 );
 
             },
