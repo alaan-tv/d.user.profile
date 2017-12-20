@@ -1,6 +1,7 @@
 import {ProfileMenuItem} from './ProfileMenuItem';
 import {ProfileProgressItem} from './dashboard/ProfileProgressItem';
 import {ProfilePieItem} from './dashboard/ProfilePieItem';
+import {request} from "../../../../../../../d.cms/cms-web-app/src/main/front-end/javascript/transport/Request";
 
 defineModule(['react'], (React)=> {
 
@@ -14,7 +15,7 @@ defineModule(['react'], (React)=> {
                 serviceRegistry.push(
                     context.registerService('d.cms.ui.component.NavigationMenuItem', (context, props)=>{
                         return React.createElement(ProfileMenuItem, props , null);
-                    }, {id: '5d4b2f67-ee47-4a84-947d-d9b65d94e3ab'})
+                    }, {id: 'd318d2a9-95ac-46fa-b1a1-a9bffc796962'})
                 );
 
                 serviceRegistry.push(
@@ -32,13 +33,15 @@ defineModule(['react'], (React)=> {
                     })
                 );
 
-
             },
             stop: (context)=>{
                 console.info('User-Profile Components Deactivated');
                 serviceRegistry.forEach( r => r.unregister() );
             }
         },
+        initializer: new Promise( (resolve, reject)=>{
+            resolve();
+        } ),
         exports:{}
     };
 
