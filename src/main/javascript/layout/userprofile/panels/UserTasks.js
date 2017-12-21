@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {CardColumns} from 'reactstrap';
-import ComponentPlaceHolder from '../../../../../../../../d.cms/cms-web-app/src/main/front-end/javascript/components/ComponentPlaceHolder';
-import {request} from "../../../../../../../../d.cms/cms-web-app/src/main/front-end/javascript/transport/Request";
 
 export default class UserTasksPanel extends Component {
 
@@ -10,12 +8,18 @@ export default class UserTasksPanel extends Component {
         this.state = {
             components: []
         };
+
+        let {breadcrumb} = this.props;
+        breadcrumb.path = [{
+            name: 'My Tasks',
+            url: '/tasks'
+        }];
     }
 
     componentWillMount() {
-        request('component/8a001058-5c6e-43d1-8e41-7868d9789817', {instanceID: 0, command: 'getData'})
-            .then( (response) => {
-                this.setState({components: response.data});
+        Request.request('component/8a001058-5c6e-43d1-8e41-7868d9789817', {instanceID: 0, command: 'getData'})
+            .then( (data) => {
+                this.setState({components: data});
             })
             .catch( (err) => console.error(`Error fetching [Dashboard] data: ${err}`));
     }

@@ -3,9 +3,6 @@ package media.dee.dcms.webapp.userprofile;
 import media.dee.dcms.components.AdminModule;
 import media.dee.dcms.components.UUID;
 import media.dee.dcms.webapp.cms.components.GUIComponent;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -15,6 +12,7 @@ import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
 import org.osgi.service.log.LogService;
 
+import javax.json.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -27,55 +25,30 @@ import java.util.function.Consumer;
 @UUID("5d4b2f67-ee47-4a84-947d-d9b65d94e3ab")
 public class ProfileProgresstem implements GUIComponent, EventHandler {
     private final AtomicReference<LogService> logRef = new AtomicReference<>();
-    private Map<String, BiConsumer<JSONObject, Consumer<JSONObject>>> commands = new HashMap<>();
+    private Map<String, BiConsumer<JsonObject, Consumer<JsonValue>>> commands = new HashMap<>();
 
     public ProfileProgresstem(){
-        commands.put("getData", (message, sendMessage)->{
+        commands.put("getData", (message, response)->{
             int rest = 100;
-            JSONArray data = new JSONArray();
+            JsonArrayBuilder data = Json.createArrayBuilder();
 
             for( int i = 0; i < 3; ++i) {
                 int value = (int)(Math.random() * rest);
                 rest -= value;
-                data.put(value);
+                data.add(value);
             }
 
-            JSONObject result = new JSONObject();
-            JSONArray labels = new JSONArray();
-            JSONObject dataset = new JSONObject();
-            JSONArray datasets = new JSONArray();
+            JsonObject result = Json.createObjectBuilder()
+                    .add("datasets", Json.createArrayBuilder().add(
+                            Json.createObjectBuilder()
+                                    .add("data", data)
+                                    .add("backgroundColor", Json.createArrayBuilder().add("#FF6384").add("#36A2EB").add("#FFCE56").build())
+                                    .add("hoverBackgroundColor", Json.createArrayBuilder().add("#FF6384").add("#36A2EB").add("#FFCE56").build())
+                    ).build())
+                    .add("labels", Json.createArrayBuilder().add("Red").add("Green").add("Yellow").build())
+                    .build();
 
-            JSONArray backgroundColor = new JSONArray();
-            JSONArray hoverBackgroundColor = new JSONArray();
-
-            labels.put("Red");
-            labels.put("Green");
-            labels.put("Yellow");
-
-            backgroundColor.put("#FF6384");
-            backgroundColor.put("#36A2EB");
-            backgroundColor.put("#FFCE56");
-
-            hoverBackgroundColor.put("#FF6384");
-            hoverBackgroundColor.put("#36A2EB");
-            hoverBackgroundColor.put("#FFCE56");
-
-            try {
-                result.put("datasets", datasets);
-                result.put("labels", labels);
-
-                dataset.put("data", data);
-                dataset.put("backgroundColor", backgroundColor);
-                dataset.put("hoverBackgroundColor", hoverBackgroundColor);
-
-                datasets.put(dataset);
-
-                sendMessage.accept(result);
-
-            } catch (JSONException ex){
-                logRef.get().log(LogService.LOG_ERROR, "JSON Write Error", ex);
-            }
-
+            response.accept(result);
         });
     }
 
@@ -96,19 +69,14 @@ public class ProfileProgresstem implements GUIComponent, EventHandler {
     @Override
     public void handleEvent(Event event) {
 
-        Consumer<JSONObject> sendMessage = (Consumer<JSONObject>) event.getProperty("sendMessage");
-        JSONObject message = (JSONObject) event.getProperty("message");
+        Consumer<JsonValue> response = (Consumer<JsonValue>) event.getProperty("response");
+        JsonObject message = (JsonObject) event.getProperty("message");
 
-        try {
-            JSONArray cmdList = message.getJSONArray("parameters");
-            for( int i = 0 ; i < cmdList.length(); ++i) {
-                JSONObject cmdObject = cmdList.getJSONObject(i);
-                String command = cmdObject.getString("command");
-                if (commands.containsKey(command))
-                    commands.get(command).accept(message, sendMessage);
-            }
-        } catch (JSONException e) {
-            logRef.get().log(LogService.LOG_ERROR, "JSON READ Error", e);
-        }
+        JsonArray cmdList = message.getJsonArray("parameters");
+        cmdList.forEach( (cmdObject)->{
+            String command = ((JsonObject)cmdObject).getString("command");
+            if (commands.containsKey(command))
+                commands.get(command).accept((JsonObject)cmdObject, response);
+        });
     }
 }

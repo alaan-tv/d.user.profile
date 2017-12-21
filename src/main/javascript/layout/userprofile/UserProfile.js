@@ -14,12 +14,6 @@ defineModule(['react'], (React)=> {
         text: 5
     });
 
-    const timer = ()=>{
-        taskBadge.text += 1;
-        setTimeout(timer, 1000);
-    };
-
-    setTimeout(timer, 2000);
 
     window.taskBadge = taskBadge;
 
@@ -99,7 +93,7 @@ defineModule(['react'], (React)=> {
             }
         },
         initializer: new Promise( (resolve, reject)=>{
-            resolve();
+            setTimeout(resolve, 1000);
         } ),
         exports:{}
     };
