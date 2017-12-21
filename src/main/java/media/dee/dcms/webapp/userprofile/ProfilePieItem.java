@@ -3,6 +3,8 @@ package media.dee.dcms.webapp.userprofile;
 import media.dee.dcms.components.AdminModule;
 import media.dee.dcms.components.UUID;
 import media.dee.dcms.webapp.cms.components.GUIComponent;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -13,6 +15,9 @@ import org.osgi.service.event.EventHandler;
 import org.osgi.service.log.LogService;
 
 import javax.json.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -30,26 +35,24 @@ public class ProfilePieItem implements GUIComponent, EventHandler {
 
     public ProfilePieItem(){
         commands.put("getData", (message, response)->{
-            int rest = 100;
-            JsonArrayBuilder data = Json.createArrayBuilder();
-
-            for( int i = 0; i < 3; ++i) {
-                int value = (int)(Math.random() * rest);
-                rest -= value;
-                data.add(value);
+            Bundle bundle = FrameworkUtil.getBundle(this.getClass());
+            URL dataURL = bundle.getResource(String.format("/data/pie/%s.json", message.getInt("instanceID")));
+            if( dataURL == null ){
+                response.accept(
+                        Json.createObjectBuilder()
+                        .add("action","error")
+                        .add("code", "not-fount")
+                        .build()
+                );
+                return;
             }
-
-            JsonObject result = Json.createObjectBuilder()
-                    .add("datasets", Json.createArrayBuilder().add(
-                            Json.createObjectBuilder()
-                                    .add("data", data)
-                                    .add("backgroundColor", Json.createArrayBuilder().add("#FF6384").add("#36A2EB").add("#FFCE56").build())
-                                    .add("hoverBackgroundColor", Json.createArrayBuilder().add("#FF6384").add("#36A2EB").add("#FFCE56").build())
-                    ).build())
-                    .add("labels", Json.createArrayBuilder().add("Red").add("Green").add("Yellow").build())
-                    .build();
-
-            response.accept(result);
+            try {
+                InputStream dataInStream = dataURL.openStream();
+                response.accept(Json.createReader(dataInStream).readObject());
+                dataInStream.close();
+            } catch (IOException ex){
+                logRef.get().log(LogService.LOG_ERROR, "Error Reading data", ex);
+            }
         });
     }
 

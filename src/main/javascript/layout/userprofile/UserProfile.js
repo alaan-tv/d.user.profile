@@ -14,13 +14,16 @@ defineModule(['react'], (React)=> {
         text: 5
     });
 
-
-    window.taskBadge = taskBadge;
+    let notificationRegistry;
 
     return {
         activator: {
             start: (context)=>{
                 console.info('User-Profile Components Activated');
+
+                notificationRegistry = globalEmitter.addListener('ws:notification', (data)=>{
+                    taskBadge.text = data.notifications;
+                });
 
                 serviceRegistry.push(
                     context.registerService('d.cms.ui.component.NavigationMenuItem', (context, props)=>{
@@ -90,6 +93,7 @@ defineModule(['react'], (React)=> {
             stop: (context)=>{
                 console.info('User-Profile Components Deactivated');
                 serviceRegistry.forEach( r => r.unregister() );
+                notificationRegistry.remove();
             }
         },
         initializer: new Promise( (resolve, reject)=>{
