@@ -2,9 +2,9 @@ import '../Profile.scss';
 import React from 'react';
 import {Card, CardBody, CardHeader} from 'reactstrap';
 import {Pie} from 'react-chartjs-2';
-import {request} from "../../../../../../../../cms-web-app/src/main/front-end/javascript/transport/Request";
+import uuid from '../uuid';
 
-
+@uuid('3ecbd060-dd59-4d9a-a2cc-ca41f1562a4a')
 class ProfilePieItem extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +17,7 @@ class ProfilePieItem extends React.Component {
     }
 
     componentDidMount() {
-        request(`component/${this.props.id}`, {instanceID: this.props.instanceID, command: 'getData'})
+        Request.request(`component/${ProfilePieItem.uuid}`, {instanceID: this.props.instanceID, command: 'getData'})
             .then( (data) => {
                 this.setState({data: data});
             })

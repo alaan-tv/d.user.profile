@@ -2,9 +2,9 @@ import '../Profile.scss';
 import React from 'react';
 import {Card, CardBody, CardHeader} from 'reactstrap';
 import {Doughnut} from 'react-chartjs-2';
-import {request} from "../../../../../../../../cms-web-app/src/main/front-end/javascript/transport/Request";
+import uuid from '../uuid';
 
-
+@uuid('5d4b2f67-ee47-4a84-947d-d9b65d94e3ab')
 class ProfileProgressItem extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +17,7 @@ class ProfileProgressItem extends React.Component {
     }
 
     componentDidMount() {
-        request(`component/${this.props.id}`, {instanceID: this.props.instanceID, command: 'getData'})
+        Request.request(`component/${ProfileProgressItem.uuid}`, {instanceID: this.props.instanceID, command: 'getData'})
             .then( (data) => {
                 this.setState({data: data});
             })

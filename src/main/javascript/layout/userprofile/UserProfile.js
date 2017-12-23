@@ -4,8 +4,9 @@ import {ProfilePieItem} from './dashboard/ProfilePieItem';
 import UserProfilePanel from "./panels/UserProfilePanel";
 import UserTasksPanel from "./panels/UserTasks";
 import {extendObservable} from 'mobx';
+import React from 'react';
 
-defineModule(['react'], (React)=> {
+defineModule([], ()=> {
 
     let serviceRegistry = [];
 
@@ -32,17 +33,12 @@ defineModule(['react'], (React)=> {
                 );
 
                 serviceRegistry.push(
-                    context.registerService('d.cms.ui.component.Dashboard.Card', (context, props)=>{
-                        return ProfilePieItem;
-                    }, {id: '3ecbd060-dd59-4d9a-a2cc-ca41f1562a4a'})
+                    context.registerService('d.cms.ui.component.Dashboard.Card', ProfilePieItem, {id: ProfilePieItem.uuid})
                 );
 
                 serviceRegistry.push(
-                    context.registerService('d.cms.ui.component.Dashboard.Card', (context, props)=>{
-                        return ProfileProgressItem;
-                    }, {
-                        id: '5d4b2f67-ee47-4a84-947d-d9b65d94e3ab',
-                        roles: ['editor-in-chief', 'system-admin', 'site-manager']
+                    context.registerService('d.cms.ui.component.Dashboard.Card', ProfileProgressItem, {
+                        id: ProfileProgressItem.uuid
                     })
                 );
 
@@ -97,7 +93,7 @@ defineModule(['react'], (React)=> {
             }
         },
         initializer: new Promise( (resolve, reject)=>{
-            setTimeout(resolve, 1000);
+            setTimeout(resolve, 500);
         } ),
         exports:{}
     };

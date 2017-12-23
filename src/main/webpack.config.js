@@ -19,8 +19,8 @@ function config(DEBUG, VERBOSE) {
                         loader: 'babel-loader',
                         options: {
                             cacheDirectory: DEBUG,
-                            presets: ['react', 'env'],
-                            plugins: ['transform-object-rest-spread']
+                            presets: ['react'],
+                            plugins: ['transform-decorators-legacy']
                         }
                     }
                 },
@@ -43,12 +43,10 @@ function config(DEBUG, VERBOSE) {
             'reactstrap': 'ReactStrap',
             'mobx-react': 'MobxReact',
             'mobx': 'Mobx',
-            '../../../../../../../../cms-web-app/src/main/front-end/javascript/transport/Request': 'Request'
         }
     };
 
     let PLUGINS = [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         // Assign the module and chunk ids by occurrence count
         // Consistent ordering of modules required if using any hashing ([hash] or [chunkhash])

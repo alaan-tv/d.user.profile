@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {CardColumns} from 'reactstrap';
 
+
 export default class UserProfilePanel extends Component {
 
     constructor(props){
