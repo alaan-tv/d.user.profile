@@ -2,7 +2,7 @@ package media.dee.dcms.webapp.userprofile;
 
 import media.dee.dcms.components.AdminModule;
 import media.dee.dcms.components.UUID;
-import media.dee.dcms.webapp.cms.components.GUIComponent;
+import media.dee.dcms.components.WebComponent;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.ComponentContext;
@@ -28,7 +28,7 @@ import java.util.function.Consumer;
 @AdminModule(value = "/webapp/userprofile", autoInstall = true)
 @Component(property= EventConstants.EVENT_TOPIC + "=component/5d4b2f67-ee47-4a84-947d-d9b65d94e3ab")
 @UUID("5d4b2f67-ee47-4a84-947d-d9b65d94e3ab")
-public class ProfileProgresstem implements GUIComponent, EventHandler {
+public class ProfileProgresstem implements WebComponent, EventHandler {
     private final AtomicReference<LogService> logRef = new AtomicReference<>();
     private Map<String, BiConsumer<JsonObject, Consumer<JsonValue>>> commands = new HashMap<>();
 
