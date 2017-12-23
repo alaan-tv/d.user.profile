@@ -17,7 +17,7 @@ class ProfileProgressItem extends React.Component {
     }
 
     componentDidMount() {
-        Request.request(`component/${ProfileProgressItem.uuid}`, {instanceID: this.props.instanceID, command: 'getData'})
+        Request.request(`component/${this.props.SymbolicName}/${this.props.Version}/${ProfileProgressItem.uuid}/getData`, {instanceID: this.props.instanceID})
             .then( (data) => {
                 this.setState({data: data});
             })

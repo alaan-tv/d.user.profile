@@ -17,7 +17,7 @@ class ProfilePieItem extends React.Component {
     }
 
     componentDidMount() {
-        Request.request(`component/${ProfilePieItem.uuid}`, {instanceID: this.props.instanceID, command: 'getData'})
+        Request.request(`component/${this.props.SymbolicName}/${this.props.Version}/${ProfilePieItem.uuid}/getData`, {instanceID: this.props.instanceID })
             .then( (data) => {
                 this.setState({data: data});
             })

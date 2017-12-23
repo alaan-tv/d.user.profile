@@ -18,7 +18,7 @@ export default class UserProfilePanel extends Component {
     }
 
     componentWillMount() {
-        Request.request('component/8a001058-5c6e-43d1-8e41-7868d9789817', {instanceID: 1, command: 'getData'})
+        Request.request(`component/dashboard`, {instanceID: 0})
             .then( (data) => {
                 this.setState({components: data});
             })

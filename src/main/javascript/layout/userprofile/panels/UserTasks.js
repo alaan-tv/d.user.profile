@@ -17,7 +17,7 @@ export default class UserTasksPanel extends Component {
     }
 
     componentWillMount() {
-        Request.request('component/8a001058-5c6e-43d1-8e41-7868d9789817', {instanceID: 0, command: 'getData'})
+        Request.request(`component/dashboard`, {instanceID: 1})
             .then( (data) => {
                 this.setState({components: data});
             })
