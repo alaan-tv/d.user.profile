@@ -1,0 +1,62 @@
+{
+  "labels": [
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S",
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S",
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S",
+    "M",
+    "T",
+    "W",
+    "T",
+    "F",
+    "S",
+    "S"
+  ],
+  "datasets": [
+    {
+      "label": "My First dataset",
+      "backgroundColor": "red",
+      "borderColor": "blue",
+      "pointHoverBackgroundColor": "#fff",
+      "borderWidth": 2,
+      "data": [163, 194, 189, 79, 180, 175, 171, 72, 127, 118, 84, 195, 149, 176, 179, 182, 134, 139, 119, 103, 62, 65, 148, 53, 155, 75, 157, 168]
+    },
+    {
+      "label": "My Second dataset",
+      "backgroundColor": "transparent",
+      "borderColor": "green",
+      "pointHoverBackgroundColor": "#fff",
+      "borderWidth": 2,
+      "data": [82,80,86,98,86,80,98,96,90,84,98,99,84,86,91,85,92,83,86,95,90,86,100,84,80,81,100,95]
+    },
+    {
+      "label": "My Third dataset",
+      "backgroundColor": "transparent",
+      "borderColor": "orange",
+      "pointHoverBackgroundColor": "#fff",
+      "borderWidth": 1,
+      "borderDash": [
+        8,
+        5
+      ],
+      "data": [65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65]
+    }
+  ]
+}

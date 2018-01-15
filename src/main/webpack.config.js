@@ -43,6 +43,7 @@ function config(DEBUG, VERBOSE) {
             'reactstrap': 'ReactStrap',
             'mobx-react': 'MobxReact',
             'mobx': 'Mobx',
+            'react-grid-layout': 'ReactGridLayout'
         }
     };
 
