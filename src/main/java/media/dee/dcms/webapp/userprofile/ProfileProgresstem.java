@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 @AdminModule(value = "/webapp/userprofile", autoInstall = true)
-@UUID("5d4b2f67-ee47-4a84-947d-d9b65d94e3ab")
+@UUID("progressItemCard")
 @Component
 public class ProfileProgresstem implements WebComponent {
     private final AtomicReference<LogService> logRef = new AtomicReference<>();

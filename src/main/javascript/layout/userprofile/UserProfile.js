@@ -15,6 +15,8 @@ defineModule([], ()=> {
         text: 5
     });
 
+    window.badge = taskBadge;
+
     let notificationRegistry;
 
     return {
