@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <groupId>meida.dee.dcms</groupId>
+        <groupId>media.dee.dcms</groupId>
         <artifactId>dee-cms-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../d.cms/pom.xml</relativePath>
 	</parent>
 	<artifactId>user-profile</artifactId>
     <name>DeeCMS User Profile</name>
@@ -55,14 +55,6 @@
             <version>${javax.servlet}</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.http</artifactId>
-            <version>${org.osgi.service.http}</version>
-            <scope>provided</scope>
-        </dependency>
-
 
         <dependency>
             <groupId>javax.json</groupId>
