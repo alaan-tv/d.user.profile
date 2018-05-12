@@ -14,7 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <felix.log>1.0.1</felix.log>
-        <websocket.api>1.1</websocket.api>
+        <jackson>2.8.0</jackson>
         <javax.servlet>3.1.0</javax.servlet>
 	</properties>
 
@@ -34,7 +34,7 @@
         </dependency>
 
         <dependency>
-            <groupId>meida.dee.dcms</groupId>
+            <groupId>media.dee.dcms</groupId>
             <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -57,10 +57,9 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.json</groupId>
-            <artifactId>javax.json-api</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson}</version>
         </dependency>
 
 
