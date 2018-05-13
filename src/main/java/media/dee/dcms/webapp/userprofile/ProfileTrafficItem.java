@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @AdminModule(value = "userprofile", resource = "/webapp", autoInstall = true)
 @Component
-@UUID("3ecbd060-dd59-4d9a-a2cc-ca41f1562a4a")
-public class ProfilePieItem implements WebComponent {
+@UUID("traffic-item")
+public class ProfileTrafficItem implements WebComponent {
 
     private final AtomicReference<LogService> logRef = new AtomicReference<>();
 
@@ -29,7 +29,7 @@ public class ProfilePieItem implements WebComponent {
     @Activate
     void activate(ComponentContext ctx) {
         LogService log = logRef.get();
-        log.log(LogService.LOG_INFO, "ProfilePieItem Activated");
+        log.log(LogService.LOG_INFO, "TrafficItem Activated");
     }
 
 }

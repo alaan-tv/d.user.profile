@@ -5,7 +5,7 @@
         <groupId>media.dee.dcms</groupId>
         <artifactId>dee-cms-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../d.cms/pom.xml</relativePath>
+        <relativePath>../../d.cms/plugins/pom.xml</relativePath>
 	</parent>
 	<artifactId>user-profile</artifactId>
     <name>DeeCMS User Profile</name>

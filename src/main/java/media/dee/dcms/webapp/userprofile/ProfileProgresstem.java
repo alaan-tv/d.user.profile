@@ -12,7 +12,7 @@ import org.osgi.service.log.LogService;
 import java.util.concurrent.atomic.AtomicReference;
 
 
-@AdminModule(value = "/webapp/userprofile", autoInstall = true)
+@AdminModule(value = "userprofile", resource = "/webapp", autoInstall = true)
 @UUID("progressItemCard")
 @Component
 public class ProfileProgresstem implements WebComponent {
