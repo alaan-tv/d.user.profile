@@ -1,8 +1,8 @@
-package media.dee.dcms.webapp.userprofile;
+package media.dee.dcms.core.webapp.userprofile;
 
-import media.dee.dcms.components.AdminModule;
-import media.dee.dcms.components.UUID;
-import media.dee.dcms.components.WebComponent;
+import media.dee.dcms.core.components.AdminModule;
+import media.dee.dcms.core.components.UUID;
+import media.dee.dcms.core.components.WebComponent;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -13,9 +13,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 @AdminModule(value = "userprofile", resource = "/webapp", autoInstall = true)
-@UUID("progressItemCard")
 @Component
-public class ProfileProgresstem implements WebComponent {
+@UUID("3ecbd060-dd59-4d9a-a2cc-ca41f1562a4a")
+public class ProfilePieItem implements WebComponent {
+
     private final AtomicReference<LogService> logRef = new AtomicReference<>();
 
 
@@ -28,6 +29,7 @@ public class ProfileProgresstem implements WebComponent {
     @Activate
     void activate(ComponentContext ctx) {
         LogService log = logRef.get();
-        log.log(LogService.LOG_INFO, "ProfileProgresstem Activated");
+        log.log(LogService.LOG_INFO, "ProfilePieItem Activated");
     }
+
 }

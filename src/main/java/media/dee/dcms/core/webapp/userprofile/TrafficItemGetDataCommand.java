@@ -1,9 +1,9 @@
-package media.dee.dcms.webapp.userprofile;
+package media.dee.dcms.core.webapp.userprofile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import media.dee.dcms.components.WebComponent;
+import media.dee.dcms.core.components.WebComponent;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.annotations.Component;
@@ -16,8 +16,9 @@ import java.net.URL;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
-@WebComponent.Command.For(value="getData", component=ProfilePieItem.class)
-public class PieItemGetDataCommand implements WebComponent.Command {
+@WebComponent.Command.For(value="getData", component=ProfileTrafficItem.class)
+public class TrafficItemGetDataCommand implements WebComponent.Command {
+
     private final AtomicReference<LogService> logRef = new AtomicReference<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -29,7 +30,7 @@ public class PieItemGetDataCommand implements WebComponent.Command {
     @Override
     public JsonNode execute(JsonNode... command) {
         Bundle bundle = FrameworkUtil.getBundle(this.getClass());
-        URL dataURL = bundle.getResource(String.format("/data/pie/%s.json", command[0].get("instanceID").asInt()));
+        URL dataURL = bundle.getResource(String.format("/data/traffic/%s.json", command[0].get("instanceID").asInt()));
         if( dataURL == null ){
             return objectMapper.createObjectNode()
                     .put("action","error")
