@@ -129,6 +129,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-Category>d.CMS</Bundle-Category>
+                        <Bundle-Vendor>dee.media</Bundle-Vendor>
                     </instructions>
                 </configuration>
             </plugin>
