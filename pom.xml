@@ -18,7 +18,16 @@
         <javax.servlet>3.1.0</javax.servlet>
 	</properties>
 
-	<dependencies>
+    <repositories>
+        <repository>
+            <name>sonatype</name>
+            <id>sonaptype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
