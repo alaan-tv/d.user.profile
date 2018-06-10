@@ -47,7 +47,7 @@ function config(DEBUG, VERBOSE) {
         }
     };
 
-    let PLUGINS = [
+    var PLUGINS = [
         new webpack.NamedModulesPlugin(),
         // Assign the module and chunk ids by occurrence count
         // Consistent ordering of modules required if using any hashing ([hash] or [chunkhash])
@@ -71,7 +71,7 @@ function config(DEBUG, VERBOSE) {
             new webpack.optimize.AggressiveMergingPlugin()
         );
 
-    const clientConfig = Object.assign(config, {
+    var clientConfig = Object.assign(config, {
 
         output: {
             filename: DEBUG ? 'userprofile.js' : 'userprofile.js',
