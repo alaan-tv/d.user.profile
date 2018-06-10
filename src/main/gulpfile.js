@@ -1,5 +1,3 @@
-'use strict';
-
 const gulp = require('gulp');
 const rm = require( 'gulp-rm' );
 const gutil = require('gulp-util');
