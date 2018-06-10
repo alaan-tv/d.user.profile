@@ -41,6 +41,7 @@
     "file-loader": "1.1.5",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.4.0",
+    "gulp-util": "^3.0.8",
     "gulp-rm": "^1.0.4",
     "gulp-sass": "^3.1.0",
     "html-loader": "0.5.1",
